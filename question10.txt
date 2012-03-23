@@ -1,0 +1,34 @@
+Frame : 10
+Object : 1
+	X Displacement : 0.000000
+	Y Displacement : 0.000000
+	Total Displacement : 0.000000
+Object : 2
+	X Displacement : 0.000000
+	Y Displacement : 0.000000
+	Total Displacement : 0.000000
+Object : 3
+	X Displacement : 19.000000
+	Y Displacement : 17.000000
+	Total Displacement : 25.495098
+	Direction :  NE
+Object : 4
+	X Displacement : -1.000000
+	Y Displacement : -1.000000
+	Total Displacement : 1.414214
+	Direction :  SW
+Object : 5
+	X Displacement : -1.000000
+	Y Displacement : -1.000000
+	Total Displacement : 1.414214
+	Direction :  SW
+Object : 6
+	X Displacement : 1.000000
+	Y Displacement : -1.000000
+	Total Displacement : 1.414214
+	Direction :  SE
+Object : 7
+	X Displacement : 3.000000
+	Y Displacement : -2.000000
+	Total Displacement : 3.605551
+	Direction :  SE

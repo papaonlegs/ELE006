@@ -1,0 +1,24 @@
+<Frame> 10
+	<Object> 1
+		<Displacement> 0 0 0 </Displacement>	Direction :  N/A
+	Area : 36	Perimeter : 72	Thickness Ratio : 1
+	<Object> 2
+		<Displacement> 0 0 0 </Displacement>	Direction :  N/A
+	Area : 25	Perimeter : 50	Thickness Ratio : 1
+	<Object> 3
+		<Displacement> 19 17 25 </Displacement>	Direction :  NE
+	Area : 6970	Perimeter : 13940	Thickness Ratio : 1
+	<Object> 4
+		<Displacement> -1 -1 1 </Displacement>
+		<Direction> SW </Direction>
+	Area : 182	Perimeter : 364	Thickness Ratio : 1
+	<Object> 5
+		<Displacement> -1 -1 1 </Displacement>
+		<Direction> SW </Direction>
+	Area : 9	Perimeter : 18	Thickness Ratio : 1
+	<Object> 6
+		<Displacement> 1 -1 1 </Displacement>	Direction :  SE
+	Area : 1085	Perimeter : 2170	Thickness Ratio : 1
+	<Object> 7
+		<Displacement> 3 -2 4 </Displacement>	Direction :  SE
+	Area : 2332	Perimeter : 4664	Thickness Ratio : 1
