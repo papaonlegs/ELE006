@@ -1,21 +1,22 @@
 function [ boundedPicture ] = QMUL_partC11( vid, frame)
     %
-    %QMUL_part8    Object bounding
-    % Counts number of objects in frame and outlines them in bounds
+    %QMUL_part11    Writes object details to file
+    % Calculates displacement details and writes to file
+    % called 'question11.txt' along with extras
     %
-    % boundedPicture = QMUL_partB8(vidFrames, frame)
+    % boundedPicture = QMUL_partB11(vidFrames, frame)
     %
     % INPUT
     % vidFrames - Frames of the video
     % frame - Frame to use
     %
     % OUTPUT
-    % boundedPicture - The picture with objects bounded
+    % boundedPicture - The picture of frame
     %
     % SOURCES NEEDED
     % QMUL_partA5.m , QMUL_thresholding.m and QMUL_FloodFill.m
 
-  %if we want video
+  %Create Text file
   output = fopen('question11.txt','w');
   fprintf(output,'Frame : %d\n', frame);
   
@@ -40,8 +41,6 @@ function [ boundedPicture ] = QMUL_partC11( vid, frame)
   xydif = zeros(1,2); %keep linked differences
   
   boundedPicture = vid(:,:,:,frame);
-  %boundedPicture2 = vid(:,:,:,frame+1);
-  %[rows cols depth] = size(boundedPicture);
   depth = 3;
   
   vidFrame = vid(:,:,:,frame);
@@ -57,6 +56,7 @@ function [ boundedPicture ] = QMUL_partC11( vid, frame)
       fprintf(output,'Object : %d\n', i);
       follow(i,1) = i;
       
+      %Find object link
       for j=1:length(centre2)
           xdis(j) = centre(i,1) - centre2(j,2);
           ydis(j) = centre(i,2) - centre2(j,2);
@@ -67,7 +67,7 @@ function [ boundedPicture ] = QMUL_partC11( vid, frame)
       follow(i,2) = index; %follow object
       xydif(i,:) = [xdis(index) ydis(index)];
       
-      
+      %write details to file
       fprintf(output,'\tX Displacement : %f\n', xdis(index));
       fprintf(output,'\tY Displacement : %f\n', ydis(index));
       fprintf(output,'\tTotal Displacement : %f\n', minDis);
@@ -95,12 +95,6 @@ function [ boundedPicture ] = QMUL_partC11( vid, frame)
       if xdis(index) == 0 && ydis(index) < 0
           fprintf(output,'\tDirection :  S\n');
       end
-      
-      color = colourList(i,:);
-      maxX = details(i,1)+details(i,3);
-      minX = details(i,1);
-      maxY = details(i,2)+details(i,4);
-      minY = details(i,2);
       
       area = details(i,3) * details(i,4);
       perimeter = 2* (details(i,3) * details(i,4));

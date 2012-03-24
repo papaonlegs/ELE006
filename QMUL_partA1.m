@@ -33,6 +33,6 @@ function[diffFrame] = QMUL_partA1(vidFrames, frame, threshold)
     
     %%
     %Display thresholded frame
-    imwrite(diffFrame, 'question1.bmp', 'bmp');
+    
     figure(),imshow(diffFrame)
 end

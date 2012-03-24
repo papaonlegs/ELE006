@@ -29,7 +29,7 @@ function[diffFrame] = QMUL_partA3(video, frame, threshold1, threshold2)
     %%
     %Combine using logical 'and'
     
-    diffFrame = FrameVid1 & FrameVid2;
+    diffFrame = FrameVid1 && FrameVid2;
     
     %%
     %Display combined frame

@@ -1,9 +1,10 @@
 function [ details centre averageColour] = QMUL_partC10i( thisFrame, backgroundFrame )
     %
-    %QMUL_part9    Feature Extraction
-    %Extracts the features of video and writes to excel file 
+    %QMUL_part10    mini Feature Extraction
+    %Extracts the features of video
+    %This is a subfunction of QMUL_partC10
     %
-    % [details centre averageColour] = QMUL_partB9(vidFrames, frame)
+    % [details centre averageColour] = QMUL_partC10i(vidFrames, frame)
     %
     % INPUT
     % vidFrames - Frames of the video
@@ -18,28 +19,7 @@ function [ details centre averageColour] = QMUL_partC10i( thisFrame, backgroundF
     % QMUL_partA5.m , QMUL_thresholding.m and QMUL_FloodFill.m
   
   tic;
-  %%
-  %Write the Excel file headers
-
-  %writeThis = {'frame', 'object', 'height', 'width', 'centreX', 'centreY', 'averageR','averageG','averageB'};
-  %xlswrite('question9.xlsx', writeThis,1,'A1');
-  %writeCounter = 2;
-  %writeThis = {};
-  %writeThis = writeThis';
-
-  %[row col ch frames] = size(vid);
-
-  %%
-  %Get The background frame
-
-  %backgroundFrame = QMUL_partA5(vid, 100, 'average');
-
-  %if we want details of whole video
-  %for frame=1:frames
-      %frame
-      %writeThis(1,1) = {frame};
-      %%
-      %Get The BW frame
+    %This is excatly same as QMUL_partB9, please check there for comments
 
       BWFrame = QMUL_thresholding(backgroundFrame, thisFrame);
       boundedFrame = thisFrame;
@@ -64,7 +44,6 @@ function [ details centre averageColour] = QMUL_partC10i( thisFrame, backgroundF
       %Get the highest and lowest numbers
 
       for i = 1: num
-          %writeThis(1,2) = {i};
           highs(i,1) = bounds(i,1,1);
           highs(i,2) = bounds(i,1,2);
           lows(i,1) = bounds(i,1,1);
@@ -97,11 +76,7 @@ function [ details centre averageColour] = QMUL_partC10i( thisFrame, backgroundF
           height = highs(i,1) - lows(i,1);
           width = highs(i,2) - lows(i,2);
           details(i,:) = [lows(i,1) lows(i,2) height width];
-          %writeThis(1,3) = {height};
-          %writeThis(1,4) = {width};
           centre(i,:) = [ceil(height/2) ceil(width/2)];
-          %writeThis(1,5) = {centre(i,1)};
-          %writeThis(1,6) = {centre(i,2)};
 
           %%
           %Find average of each colour channel within bounding box
@@ -111,15 +86,7 @@ function [ details centre averageColour] = QMUL_partC10i( thisFrame, backgroundF
           for c=1:3
             averageColour(i,c) = mean2(originalFrame(xCoords,yCoords,c));
           end
-          %writeThis(1,7) = {averageColour(i,1)};
-          %writeThis(1,8) = {averageColour(i,2)};
-          %writeThis(1,9) = {averageColour(i,3)};
-
-          %%
-          %Do not forget to write in newline so as not to overwrite previous
-          %next = sprintf('A%d', writeCounter);
-          %writeCounter = writeCounter + 1;
-          %xlswrite('question9.xlsx', writeThis,1,next);
+        
       end
 
       

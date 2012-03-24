@@ -1,21 +1,22 @@
 function [ boundedPicture ] = QMUL_partC12( vid, frame)
     %
-    %QMUL_part8    Object bounding
-    % Counts number of objects in frame and outlines them in bounds
+    %QMUL_part12    XML creation of Video details
+    % Creates an xml file with frame details
+    % Writes an xml file called 'question12.xml'
     %
-    % boundedPicture = QMUL_partB8(vidFrames, frame)
+    % boundedPicture = QMUL_partB12(vidFrames, frame)
     %
     % INPUT
     % vidFrames - Frames of the video
     % frame - Frame to use
     %
     % OUTPUT
-    % boundedPicture - The picture with objects bounded
+    % boundedPicture - The picture of frame
     %
     % SOURCES NEEDED
     % QMUL_partA5.m , QMUL_thresholding.m and QMUL_FloodFill.m
 
-  %if we want video
+  %Create Document Object model for writing
   docNode = com.mathworks.xml.XMLUtils.createDocument... 
     ('Frame');
     docRootNode = docNode.getDocumentElement;
@@ -25,7 +26,7 @@ function [ boundedPicture ] = QMUL_partC12( vid, frame)
     docRootNode.appendChild(thisElement);
   
   
-  
+  %List of colours
   colourList(1,:) = [255 255 255]; %White
   colourList(2,:) = [0 0 0]; %Black
   colourList(3,:) = [255 0 0]; %Red
@@ -53,13 +54,13 @@ function [ boundedPicture ] = QMUL_partC12( vid, frame)
   background = QMUL_partA5(vid, 100, 'average');
   
   tic;
-  
+  %Retrieve details of frames
   [details centre avg] = QMUL_partC10i(vidFrame, background);
   [details2 centre2 avg] = QMUL_partC10i(nextFrame, background);
   
   for i=1:length(centre)
-      fprintf(output,'\n\t<Object> %d', i);
       
+      %add object and number to DOM
       objElement = docNode.createElement('Object');
       docRootNode.appendChild(objElement);
       thisElement = docNode.createElement('Number')
@@ -148,12 +149,9 @@ function [ boundedPicture ] = QMUL_partC12( vid, frame)
     objElement.appendChild(thisElement);
       
       area = details(i,3) * details(i,4);
-      perimeter = 2* (details(i,3) * details(i,4));
-      thicknessRatio = area/perimeter;
+      perimeter = 2* (details(i,3) + details(i,4));
+      thicknessRatio = perimeter/area;
       
-      fprintf(output,'\tArea : %d',area);
-      fprintf(output,'\tPerimeter : %d',perimeter);
-      fprintf(output,'\tThickness Ratio : %.00f', thicknessRatio);
       
       thisElement = docNode.createElement('Area')
     thisElement.appendChild... 
@@ -167,13 +165,16 @@ function [ boundedPicture ] = QMUL_partC12( vid, frame)
     
     thisElement = docNode.createElement('Thickness_Ratio')
     thisElement.appendChild... 
-        (docNode.createTextNode(sprintf('%.00f', thicknessRatio)));
+        (docNode.createTextNode(sprintf('%f', thicknessRatio)));
     objElement.appendChild(thisElement);
       
   end
   
+  %Write DOM to file
   xmlFileName = ['question12.xml'];
     xmlwrite(xmlFileName,docNode);
+    
+    %type file to screen
     type(xmlFileName);
   toc
 end
